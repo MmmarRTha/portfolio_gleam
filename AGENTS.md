@@ -12,7 +12,7 @@
 
 | Command | Action |
 |---|---|
-| `gleam run` | Start dev server (lustre_dev_tools) |
+| `gleam run -m lustre/dev start` | Start dev server (lustre_dev_tools) |
 | `gleam test` | Run all tests |
 | `gleam format src test` | Auto-format code |
 | `gleam format --check src test` | CI format check (runs after tests in CI) |

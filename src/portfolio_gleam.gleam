@@ -5,7 +5,7 @@ import lustre/event.{on_click, on_input}
 
 pub fn main() {
   let app = lustre.simple(init, update, view)
-  let assert Ok(_) = lustre.start(app, "#app", Nil)
+  let _ = lustre.start(app, "#app", Nil)
 
   Nil
 }
