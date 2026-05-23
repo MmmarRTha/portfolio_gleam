@@ -1,7 +1,8 @@
 import lustre
-import lustre/element.{text}
-import lustre/element/html.{button, div, input, p}
-import lustre/event.{on_click, on_input}
+import lustre/attribute
+import lustre/element
+import lustre/element/html
+import lustre/event
 
 pub fn main() {
   let app = lustre.simple(init, update, view)
@@ -31,9 +32,24 @@ fn update(model: Model, msg: Msg) {
 }
 
 fn view(model: Model) {
-  div([], [
-    input([on_input(UserUpdatedName)]),
-    button([on_click(UserClickedGreet)], [text("Greet")]),
-    p([], [text(model.greeting)]),
+  html.div([attribute.class("flex flex-col gap-4 p-8 max-w-md mx-auto mt-10")], [
+    html.input([
+      attribute.class(
+        "border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-pink-500",
+      ),
+      event.on_input(UserUpdatedName),
+    ]),
+    html.button(
+      [
+        attribute.class(
+          "bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-lg transition",
+        ),
+        event.on_click(UserClickedGreet),
+      ],
+      [element.text("Greet")],
+    ),
+    html.p([attribute.class("text-gray-700 text-lg")], [
+      element.text(model.greeting),
+    ]),
   ])
 }
