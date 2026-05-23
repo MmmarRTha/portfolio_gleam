@@ -1,37 +1,39 @@
 import lustre
 import lustre/attribute
-import lustre/element
+import lustre/element.{type Element}
 import lustre/element/html
 import lustre/event
 
-pub fn main() {
+pub fn main() -> Nil {
   let app = lustre.simple(init, update, view)
   let _ = lustre.start(app, "#app", Nil)
 
   Nil
 }
 
+/// The application state.
 type Model {
   Model(name: String, greeting: String)
 }
 
-fn init(_flags) {
+fn init(_flags: Nil) -> Model {
   Model(name: "", greeting: "")
 }
 
+/// Messages the application can handle.
 type Msg {
   UserUpdatedName(String)
   UserClickedGreet
 }
 
-fn update(model: Model, msg: Msg) {
+fn update(model: Model, msg: Msg) -> Model {
   case msg {
     UserUpdatedName(name) -> Model(..model, name: name)
     UserClickedGreet -> Model(..model, greeting: "Hello " <> model.name <> "!")
   }
 }
 
-fn view(model: Model) {
+fn view(model: Model) -> Element(Msg) {
   html.div([attribute.class("flex flex-col gap-4 p-8 max-w-md mx-auto mt-10")], [
     html.input([
       attribute.class(
